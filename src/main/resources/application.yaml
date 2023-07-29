@@ -1,0 +1,11 @@
+spring:
+    redis:
+        host: ${REDIS_HOST:localhost}
+        port: ${REDIS_PORT:6379}
+    cache:
+        type: redis
+        redis:
+            time-to-live: 600000
+app:
+    auth:
+        jwks-url: https://devfalcao.us.auth0.com/.well-known/jwks.json
