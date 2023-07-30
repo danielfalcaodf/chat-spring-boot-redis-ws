@@ -2,19 +2,56 @@ version: '3.9'
 services:
   redis:
     image: redis:7.0.5-alpine
+    networks:
+      - chat-ws-redis
     restart: always
     ports:
       - "6379:6379"
     environment:
       ALLOW_EMPTY_POSSWORD: yes
   mongodb:
-    image: mongo:5.0
+    image: mongo:latest
+    networks:
+      - chat-ws-redis
+    container_name: mongodb
     restart: always
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITTDB_ROOT_USERNAME: root
-      MONGO_INITTDB_ROOT_PASSWORD: root
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: chat
+    volumes:
+      - mongodb_data:/data/db
+  chat-api-ws:
+    build: .
+    image: chat-api-ws-image
+    networks:
+      - chat-ws-redis
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./src/:/app/src/"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_DB_URI=mongodb://root:chat@mongodb
+      - MONGODB_DATABASE=chatDb
+    depends_on:
+      - redis
+      - mongodb
+  chat-front-ws:
+    container_name: front-chat-ws
+    networks:
+      - chat-ws-redis
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+       - "./frontend/:/usr/share/nginx/html"
 
 networks:
   chat-ws-redis:
+volumes:
+  mongodb_data:
