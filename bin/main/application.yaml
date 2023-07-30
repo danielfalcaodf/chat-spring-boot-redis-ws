@@ -8,7 +8,7 @@ spring:
             time-to-live: 600000
     data:
         mongodb:
-            uri: {MONGO_DB_URI:mongodb://root:root@localhost}
+            uri: ${MONGO_DB_URI:mongodb://root:chat@localhost}
             database: ${MONGODB_DATABASE:chatDb}
 app:
     auth:

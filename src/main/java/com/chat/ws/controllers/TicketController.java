@@ -22,6 +22,5 @@ public class TicketController {
         String ticket = ticketService.buildAndSaveTicket(token);
         return Map.of("ticket", ticket);
 
-
     }
 }
