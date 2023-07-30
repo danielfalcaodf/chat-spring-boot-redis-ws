@@ -156,6 +156,16 @@ function isAuthenticated() {
 // ----------------------------------------------------------------------------
 function getJwt() {
     return getAuth0Client()
-        .then(function (auth0Client) { return auth0Client.getIdTokenClaims() })
+        .then(function (auth0Client) { return Promise.all([auth0Client, auth0Client.getIdTokenClaims()]) })
+        .then(function (res) {
+            var auth0Client = res[0]
+            var claims = res[1]
+            var isTokenExpired = Date.now() > (claims.exp * 1000)
+            return Promise.all([auth0Client, isTokenExpired && auth0Client.getTokenSilently({ cacheMode: "off" })])
+        })
+        .then(function (res) {
+            var auth0Client = res[0]
+            return auth0Client.getIdTokenClaims()
+        })
         .then(function (claims) { return claims.__raw })
 }
