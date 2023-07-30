@@ -1,65 +1,77 @@
-# Projeto de Chat em Java - Spring Boot
+# Projeto de Chat com WebScoket em Java - Spring Boot
 
 <div style="text-align: center;">
 <img src="https://4.bp.blogspot.com/-ou-a_Aa1t7A/W6IhNc3Q0gI/AAAAAAAAD6Y/pwh44arKiuM_NBqB1H7Pz4-7QhUxAgZkACLcBGAs/s1600/spring-boot-logo.png" width="200">
 <img src="https://www.jittagornp.me/blog/what-is-websocket/websocket-icon.jpeg" width="200">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Logo-redis.svg/2560px-Logo-redis.svg.png" width="200">
 <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Gradle_logo.png" width="300">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Logo-redis.svg/2560px-Logo-redis.svg.png" width="200">
+<img src="https://www.mundodocker.com.br/wp-content/uploads/2015/06/docker_facebook_share.png" width="200">
+<img src="https://linuxscriptshub.com/wp-content/uploads/2017/04/Nginx-Logo.png" width="200">
+<img src="https://www.dbi-services.com/wp-content/uploads/2022/01/Logo-Mongodb-carre.png" width="200">
 </div>
 
-## Descrição do Projeto
-
-Este é um projeto de chat em tempo real desenvolvido utilizando Java com Spring Boot. O objetivo é criar uma aplicação de chat que utiliza WebSocket para comunicação em tempo real entre o backend e o frontend. Além disso, o projeto faz uso do Redis para implementar o padrão Pub/Sub e garantir escalabilidade e alta disponibilidade.
-
-## Funcionalidades
-
-- Backend Spring Boot que recebe e emite eventos WebSocket em tempo real.
-- Frontend web que emite e recebe eventos WebSocket em tempo real.
-- Proteção do backend utilizando JWT (JSON Web Token) e Tickets.
-- Utilização do padrão Pub/Sub com Redis para comunicação assíncrona.
-- Implantação da aplicação com arquitetura escalável e altamente disponível.
+Este é um projeto de chat que utiliza tecnologias como Spring Boot, WebSockets, Redis, Gradle, Java 17, Docker, Auth0, MongoDB, Nginx, HTML, JS e CSS. O objetivo é criar um chat em tempo real que permite a comunicação entre os usuários através de uma interface web.
 
 ## Tecnologias Utilizadas
 
-- Java 17
-- Spring Boot
-- WebSocket
-- Redis
-- Gradle
+Aqui estão as principais tecnologias usadas no projeto:
+
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.14-brightgreen)
+![Gradle](https://img.shields.io/badge/Gradle-8.2.1-yellow)
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Redis](https://img.shields.io/badge/Redis-7.0.5-red)
+![Auth0](https://img.shields.io/badge/Auth0-4.2.1-green)
+![Nginx](https://img.shields.io/badge/Nginx-1.17.1-green)
+![Docker](https://img.shields.io/badge/Docker-latest-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-latest-green)
+![HTML](https://img.shields.io/badge/HTML-latest-orange)
+![JS](https://img.shields.io/badge/JavaScript-latest-yellow)
+![CSS](https://img.shields.io/badge/CSS-latest-blue)
 
 ## Arquitetura do Projeto
 
-O projeto segue uma arquitetura cliente-servidor, onde o backend é responsável por receber e emitir eventos WebSocket, enquanto o frontend é responsável por exibir a interface de chat e enviar/receber mensagens em tempo real.
+O projeto é dividido em duas partes principais: o backend e o frontend.
 
-O uso do Redis como mecanismo de mensageria permite a implementação do padrão Pub/Sub, onde os clientes se inscrevem em canais específicos e recebem mensagens publicadas por outros clientes.
+### Backend
 
-## Instruções de Execução
+O backend é desenvolvido em Spring Boot e utiliza WebSockets para permitir a comunicação em tempo real entre os clientes. Além disso, é implementada a proteção utilizando o JWT do Auth0 e Tickets para garantir a autenticação dos usuários. O padrão Pub/Sub é adotado utilizando o Redis para otimizar a troca de mensagens entre os diferentes componentes do sistema.
 
-1. Certifique-se de ter o Java 17 instalado em sua máquina.
-2. Instale o Redis e certifique-se de que esteja em execução na porta padrão.
-3. Clone este repositório para o seu ambiente local.
-4. Acesse a pasta do projeto e execute o comando `./gradlew bootRun` para iniciar o backend.
-5. Acesse a pasta do frontend e execute o comando `npm install` para instalar as dependências do projeto.
-6. Após a instalação, execute o comando `npm start` para iniciar o servidor de desenvolvimento do frontend.
-7. Abra o navegador e acesse a URL `http://localhost:3000` para acessar o chat.
+O backend também é responsável por interagir com o banco de dados MongoDB para salvar e recuperar alguns dados dos usuários.
 
-<!-- ## Capturas de Tela
+### Frontend
 
-![Captura de Tela 1](https://exemplo.com/captura1.png)
+O frontend é desenvolvido utilizando HTML, JS e CSS para criar uma interface web simples de chat. Ele se conecta ao backend através de WebSockets para enviar e receber mensagens em tempo real.
 
-![Captura de Tela 2](https://exemplo.com/captura2.png) -->
+### Diagrama
 
-<!-- ## Estatísticas do Projeto
+![diagrama](diagrama-chat.drawio.png)
 
-- Total de linhas de código: XX
-- Número de commits: XX
-- Número de issues abertas: XX
-- Número de pull requests aceitas: XX -->
+## Executando o Projeto
 
-## Contribuindo
+Para executar o projeto, siga os passos abaixo:
 
-Contribuições são bem-vindas! Se você encontrar algum problema ou tiver uma sugestão de melhoria, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+1. Certifique-se de ter o Docker instalado em sua máquina.
 
-## Autores
+2. Clone este repositório.
 
-- Daniel Falcão
+3. No terminal, navegue até o diretório do projeto e execute o seguinte comando para iniciar o backend, Frontend e o banco de dados:
+
+```bash
+docker-compose up -d --build
+```
+
+4. Acesse o frontend em seu navegador através do endereço: `https://localhost`.
+
+5. Agora, você pode utilizar o chat em tempo real para se comunicar com outros usuários conectados.
+
+## Demo
+
+<iframe src="https://drive.google.com/file/d/1V5Qf8BaFub5Le3QbetZO5vxHnP9cW1_b/preview" width="640" height="480" allow="autoplay"></iframe>
+
+## Considerações Finais
+
+Este projeto demonstra o uso de várias tecnologias modernas para criar um chat em tempo real escalável e altamente disponível. Sinta-se à vontade para explorar o código-fonte e adaptá-lo para suas próprias necessidades.
+
+Se tiver alguma dúvida ou encontrar algum problema, sinta-se à vontade para entrar em contado em danielfalcao.df@gmail.com
+
+Divirta-se codificando! 🚀
